@@ -1,0 +1,19 @@
+# pylint: skip-file
+# pyright: ignore
+# flake8: noqa
+
+# キュー
+from collections import deque
+# defaultdict
+from collections import defaultdict
+# bitsect
+from bisect import bisect_right
+
+
+# 読み込み行数が多そう
+import sys
+input = sys.stdin.readline
+
+
+# ドーナツ型座標(n*m),周辺3x3ます
+P = [((dx) % n, (dy) % m) for dx in (-1, 0, 1) for dy in (-1, 0, 1)]
