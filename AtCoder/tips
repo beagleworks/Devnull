@@ -2,7 +2,7 @@
 # pyright: ignore
 # flake8: noqa
 
-# キュー
+# deque
 from collections import deque
 # defaultdict
 from collections import defaultdict
