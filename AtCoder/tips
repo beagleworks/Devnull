@@ -8,8 +8,12 @@ from collections import deque
 from collections import defaultdict
 # bitsect
 from bisect import bisect_right
-# isqrt
+# isqrt O(logN)
 from math import isqrt
+# Priority Queue
+import heapq
+# from queue import PriorityQueue
+
 
 # 読み込み行数が多そう
 import sys
