@@ -18,6 +18,4 @@ for i in range(len(D)):
     ans += D[i - 1][1] * D[i + 1][1]
 
 print(ans)
-      
 
-    

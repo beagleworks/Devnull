@@ -1,25 +1,3 @@
-# pylint: skip-file
-# pyright: ignore
-# flake8: noqa
-
-# deque
-from collections import deque
-# defaultdict
-from collections import defaultdict
-# bitsect(bisect_left, bisect_right)
-import bisect
-# isqrt O(logN)
-from math import isqrt
-# Priority Queue
-import heapq
-# from queue import PriorityQueue
-
-
-# 読み込み行数が多そう
-import sys
-input = sys.stdin.readline
-
-# DSU
 class DSU():
   # 初期化
   def __init__(self, n):
@@ -56,3 +34,18 @@ class DSU():
   # x を含む根付き木のサイズを求める
   def size(self, x):
     return self.siz[self.root(x)]
+
+N, M = map(int, input().split())
+
+ans = 0
+dsu = DSU(N)
+for i in range(M):
+  u, v = map(int, input().split())
+  u -= 1
+  v -= 1
+  if dsu.issame(u, v):
+    ans += 1
+  else:
+    dsu.unite(u, v)
+
+print(ans)
