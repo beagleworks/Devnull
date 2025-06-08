@@ -6,10 +6,10 @@ fqu = [0] * N
 pal = 0
 
 for _ in range(M):
-  a, b = map(int, input().split())
-  x = (a + b) % N
+    a, b = map(int, input().split())
+    x = (a + b) % N
 
-  pal += fqu[x]
-  fqu[x] += 1
+    pal += fqu[x]
+    fqu[x] += 1
 
 print((M * (M - 1) // 2) - pal)

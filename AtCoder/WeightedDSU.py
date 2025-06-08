@@ -13,7 +13,7 @@ class WeightedDSU:
     unite(x, y, w):
         「y のポテンシャル - x のポテンシャル = w」 という制約を
         付けて集合をマージする。既に同じ集合内で矛盾があれば何もしない。
-    
+
     How to use:
     # 5 要素 (0～4) を用意
         dsu = WeightedDSU(5)
@@ -33,8 +33,9 @@ class WeightedDSU:
         # 同じ集合かどうかの判定
         print(dsu.find(0) == dsu.find(2))  # => True
         print(dsu.find(3) == dsu.find(4))  # => False
-    
+
     """
+
     def __init__(self, n: int):
         self.n = n
         self.parent = list(range(n))

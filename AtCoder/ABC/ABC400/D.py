@@ -15,25 +15,25 @@ q = deque([(A, B)])
 d = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
 while q:
-  y, x = q.popleft()
-  if y == C and x == D:
-    break
-  for dy, dx in d:
-    ny = y + dy
-    nx = x + dx
-    nny = ny + dy
-    nnx = nx + dx
-    if 0 <= ny < H and 0 <= nx < W:
-      if S[ny][nx] == '.' and dp[ny][nx] > dp[y][x]:
-        dp[ny][nx] = dp[y][x]
-        q.appendleft((ny, nx))
-      elif S[ny][nx] == '#':
-        if dp[ny][nx] > dp[y][x] + 1:
-          dp[ny][nx] = dp[y][x] + 1
-          q.append((ny, nx))
-        if 0 <= nny < H and 0 <= nnx < W:
-          if dp[nny][nnx] > dp[y][x] + 1:
-            dp[nny][nnx] = dp[y][x] + 1
-            q.append((nny, nnx))
+    y, x = q.popleft()
+    if y == C and x == D:
+        break
+    for dy, dx in d:
+        ny = y + dy
+        nx = x + dx
+        nny = ny + dy
+        nnx = nx + dx
+        if 0 <= ny < H and 0 <= nx < W:
+            if S[ny][nx] == '.' and dp[ny][nx] > dp[y][x]:
+                dp[ny][nx] = dp[y][x]
+                q.appendleft((ny, nx))
+            elif S[ny][nx] == '#':
+                if dp[ny][nx] > dp[y][x] + 1:
+                    dp[ny][nx] = dp[y][x] + 1
+                    q.append((ny, nx))
+                if 0 <= nny < H and 0 <= nnx < W:
+                    if dp[nny][nnx] > dp[y][x] + 1:
+                        dp[nny][nnx] = dp[y][x] + 1
+                        q.append((nny, nnx))
 
 print(dp[C][D])

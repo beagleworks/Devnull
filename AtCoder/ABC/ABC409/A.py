@@ -3,8 +3,8 @@ T = input()
 A = input()
 
 for i in range(N):
-  if T[i] == A[i] and T[i] == 'o':
-    print("Yes")
-    exit()
+    if T[i] == A[i] and T[i] == 'o':
+        print("Yes")
+        exit()
 
 print("No")
