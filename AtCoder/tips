@@ -6,15 +6,16 @@
 from collections import deque
 # defaultdict
 from collections import defaultdict
-# bitsect(bisect_left, bisect_right)
-import bisect
+# bisect(bisect_left, bisect_right)
+from bisect import bisect_left, bisect_right
 # isqrt O(logN)
 from math import isqrt
 # Priority Queue
 import heapq
 # SortedList(SortedDict, SortedSet)
 from sortedcontainers import SortedList
-
+# 分数
+from fractions import Fraction
 
 # 読み込み行数が多そう
 import sys
