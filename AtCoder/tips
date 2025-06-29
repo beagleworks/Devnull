@@ -7,22 +7,69 @@ from collections import deque
 # defaultdict
 from collections import defaultdict
 # bisect(bisect_left, bisect_right)
-from bisect import bisect_left, bisect_right
+from bisect import bisect_left
+from bisect import bisect_right
 # isqrt O(logN)
 from math import isqrt
 # Priority Queue
 import heapq
-# SortedList(SortedDict, SortedSet)
+# SortedContainers
 from sortedcontainers import SortedList
+from sortedcontainers import SortedDict
+from sortedcontainers import SortedSet
 # 分数
 from fractions import Fraction
+# コンビネーション・パーミュテーション
+from itertools import combinations, permutations
+
+# popcount
+def popcount(x):
+    return bin(x).count('1')
+# 座標圧縮
+def shrink(X):
+    return {x: i for i, x in enumerate(sorted(set(X)))}
 
 # 読み込み行数が多そう
 import sys
 input = sys.stdin.readline
+
+# 入力がA1, B1 \n , ... , An, Bnの形式
+'''
+A1, B1
+A2, B2
+...
+An, Bn
+'''
+N = int(input())
+A, B = zip(*(map(int, input().split()) for _ in range(N)))
+A, B = list(A), list(B)
+'''
+上記をtupleで受け取る場合
+'''
+C = [tuple(map(int, input().split()) for _ in range(N))]
 
 # ACL
 # DSU
 from atcoder.dsu import DSU
 # FenwickTree
 from atcoder.fenwicktree import FenwickTree
+
+# マルチテストケース
+def solve():
+    N = int(input())
+
+def main():
+    T = int(input())        
+    for _ in range(T):
+        solve()
+
+if __name__ == '__main__':
+    main()
+
+
+# シングルテストケース
+def main():
+    N = int(input())
+
+if __name__ == '__main__':
+    main()
