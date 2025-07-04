@@ -59,7 +59,7 @@ def solve():
     N = int(input())
 
 def main():
-    T = int(input())        
+    T = int(input())
     for _ in range(T):
         solve()
 
