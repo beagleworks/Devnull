@@ -43,11 +43,8 @@ An, Bn
 N = int(input())
 A, B = zip(*(map(int, input().split()) for _ in range(N)))
 A, B = list(A), list(B)
-'''
-上記をtupleで受け取る場合
-'''
-C = [tuple(map(int, input().split()) for _ in range(N))]
-
+# 上記を0-indexに変換してタプルで受け取る方法
+C = [tuple(int(x) - 1 for x in input().split()) for _ in range(N)]
 # ACL
 # DSU
 from atcoder.dsu import DSU
