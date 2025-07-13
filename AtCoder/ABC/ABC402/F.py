@@ -1,101 +1,58 @@
-from bisect import bisect_right
-import sys
-input = sys.stdin.readline
+# 半分全列挙
+# どのルートも左下から右上の対角線上を必ず1回通るため、この対角線上の点までのルート + 対角線上から(N, N)までのルート の 和のMODが最大のものを探す
+# 対角線上から(N, N)までのルート は 逆に考え (N, N)から対角線上までのルートを考える
+def main():
+    from bisect import bisect_left
 
-N, M = map(int, input().split())
-A = [list(map(int, input().split())) for _ in range(N)]
+    N, M = map(int, input().split())
+    A = [list(map(int, input().split())) for _ in range(N)]
 
-# 例外
-if N == 1:
-    print(A[0][0] % M)
-    exit()
+    H1 = [[] for _ in range(N)]
+    for bit in range(1 << (N - 1)):
+        x, y = 0, 0
+        cnt = 0
+        for i in range(N - 1):
+            cnt *= 10
+            cnt %= M
+            cnt += A[x][y]
+            cnt %= M
 
-x = pow(10, N - 1, M)
-y = [-1] * (N * N)
+            if bit & (1 << i):
+                x += 1
+            else:
+                y += 1
+        
+        cnt *= 10
+        cnt %= M
+        cnt += A[x][y]
+        cnt %= M
 
-for i in range(1, N):
-    j = N - i
-    if 0 <= j < N:
-        y[i * N + j] = i - 1
+        cnt *= pow(10, N - 1, M)
+        H1[x].append(cnt % M)
+    
+    H2 = [[] for _ in range(N)]
+    for bit in range(1 << (N - 1)):
+        x, y = N - 1, N - 1
+        cnt = 0
+        for i in range(N - 1):
+            cnt += A[x][y] * pow(10, i, M)
+            cnt %= M
 
-z = [0]
-w = [0]
-for _ in range(N):
-    z2, w2 = [], []
-    for p, q in zip(z, w):
-        i, j = divmod(p, N)
-        r = (q * 10 + A[i][j]) % M
-        if i + 1 < N:
-            z2.append(p + N)
-            w2.append(r)
-        if j + 1 < N:
-            z2.append(p + 1)
-            w2.append(r)
-    z, w = z2, w2
+            if bit & (1 << i):
+                x -= 1
+            else:
+                y -= 1
+        
+        H2[x].append(cnt)
+    
+    ans = 0
+    for i in range(N):
+        H2[i].sort()
+        for h1 in H1[i]:
+            idx = bisect_left(H2[i], M - h1)
+            ans = max(ans, ((h1 + (H2[i][idx - 1])) % M if idx >= 0 else 0))
+    
+    print(ans)
 
-u = [[] for _ in range(N - 1)]
-for p, q in zip(z, w):
-    g = y[p]
-    u[g].append(q)
-
-z = w = None
-s, t, v = [], [], []
-for g in range(N - 1):
-    i = g + 1
-    j = N - i
-    p = i * N + j
-
-    s.append(p)
-    t.append(A[i][j] % M)
-    v.append(g)
-
-for _ in range(N - 2):
-    s2, t2, v2 = [], [], []
-    for p, q, g in zip(s, t, v):
-        i, j = divmod(p, N)
-        if i + 1 < N:
-            nid = p + N
-            r = (q * 10 + A[i + 1][j]) % M
-            s2.append(nid)
-            t2.append(r)
-            v2.append(g)
-        if j + 1 < N:
-            nid = p + 1
-            r = (q * 10 + A[i][j + 1]) % M
-            s2.append(nid)
-            t2.append(r)
-            v2.append(g)
-
-    s, t, v = s2, t2, v2
-
-w = [[] for _ in range(N - 1)]
-for q, g in zip(t, v):
-    w[g].append(q)
-
-ans = 0
-for g in range(N - 1):
-    a = u[g]
-    b = w[g]
-
-    if not a or not b:
-        continue
-
-    b.sort()
-
-    m = b[-1]
-    for p in a:
-        q = (p * x) % M
-        lim = M - 1 - q
-        idx = bisect_right(b, lim)
-        if idx:
-            val = q + b[idx - 1]
-            if val > ans:
-                ans = val
-
-        val2 = q + m
-        if val2 >= M:
-            val2 -= M
-        if val2 > ans:
-            ans = val2
-
-print(ans)
+if __name__ == '__main__':
+    main()

@@ -55,13 +55,13 @@ from atcoder.fenwicktree import FenwickTree
 def solve():
     N = int(input())
 
-def main():
+def main0():
     T = int(input())
     for _ in range(T):
         solve()
 
 if __name__ == '__main__':
-    main()
+    main0()
 
 
 # シングルテストケース
